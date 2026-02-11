@@ -171,6 +171,8 @@ body {
     margin: 20px 0 40px 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Allow multiple buttons to stack or flow */
+    gap: 20px;
 }
 
 .hero-section.hidden {
@@ -426,3 +428,194 @@ body {
 .footer-links a:hover {
     text-decoration: underline;
 }
+
+/* --- NEW HERO BUTTONS (Classroom / Moodle) --- */
+
+/* General Hero Button Style (Shared logic) */
+.hero-btn {
+    width: 100%;
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 10px 0 #c7c7c7, 0 15px 20px rgba(0,0,0,0.15);
+    transform: translateY(0);
+    transition: all 0.2s;
+    position: relative;
+    /* overflow: visible for dropdowns */
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 0 #c7c7c7, 0 20px 30px rgba(0,0,0,0.2);
+}
+
+.hero-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 4px 0 #c7c7c7, inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hero-btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0));
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+/* Specific Hero Buttons */
+.classroom-hero-btn {
+    background: linear-gradient(135deg, #e6f4ea 0%, #ceead6 100%);
+    color: #137333;
+}
+
+.moodle-hero-btn {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+}
+
+.hero-icon-svg {
+    width: 60px;
+    height: 60px;
+    fill: currentColor;
+}
+
+.hero-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #333;
+}
+
+/* Hero Button Wrapper for Dropdowns */
+.hero-wrapper {
+    position: relative;
+    /* width/max-width handled by child */
+}
+
+/* Hero Dropdown Menu */
+.hero-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 15px;
+    z-index: 200;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid #ddd;
+}
+
+.hero-dropdown.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    pointer-events: none;
+}
+
+.hero-dropdown-item {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    border: 1px solid #eee;
+    transition: background 0.2s;
+    text-align: right;
+}
+
+.hero-dropdown-item:hover {
+    background: #eee;
+}
+
+.hero-dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+/* VS Code Light Frame Simulation */
+:root {
+    --vscode-shell-bg: #f3f3f3; /* window background */
+    --vscode-titlebar: #ffffff; /* title bar */
+    --vscode-activity-bg: #ededed; /* activity bar */
+    --vscode-editor-bg: #ffffff; /* editor pane */
+    --vscode-border: #e6e6e6;
+}
+
+.vscode-shell {
+    min-height: 100vh;
+    display: flex;
+    background: var(--vscode-shell-bg);
+}
+
+.activity-bar {
+    width: 48px;
+    background: var(--vscode-activity-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 6px;
+    gap: 14px;
+    box-shadow: inset -1px 0 0 var(--vscode-border);
+}
+.activity-icon{
+    width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:default;font-size:16px;color:#666
+}
+
+.vscode-window {
+    flex:1; /* take remaining space */
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding: 14px; /* outer padding around the frame */
+}
+
+.titlebar{
+    height: 36px;
+    background: var(--vscode-titlebar);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0 10px;
+    border: 1px solid var(--vscode-border);
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #444;
+}
+.titlebar-left{display:flex;align-items:center;gap:8px}
+.traffic{width:11px;height:11px;border-radius:50%;display:inline-block}
+.traffic.red{background:#ff5f56}
+.traffic.yellow{background:#ffbd2e}
+.traffic.green{background:#27c93f}
+.title{font-weight:600;opacity:0.9}
+
+.editor-pane{
+    background: var(--vscode-editor-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    padding: 18px;
+    min-height: calc(100vh - 140px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    overflow:auto;
+}
+
+/* Ensure the inner top-bar and container look good inside editor pane */
+.editor-pane .top-bar{background:transparent;border-bottom:none;box-shadow:none;padding:6px 0;margin:0 0 12px 0}
+.editor-pane .container{background:transparent;max-width:100%;padding:0}
