@@ -38,7 +38,7 @@ if($rules -notmatch "<title>\s*כללים\s*</title>"){Fail "rules.html title mu
 if($rules -notmatch "<h1>\s*כללים\s*</h1>"){Fail "rules.html h1 must be כללים"}
 if($rules -notmatch "Change Log"){
   $ins="`r`n<section>`r`n  <h2>Change Log</h2>`r`n  <p>כל שינוי חייב להיות מתועד כאן. ללא תיעוד – אין commit.</p>`r`n  <ul id=""changeLog""></ul>`r`n</section>`r`n"
-  $rules=$rules -replace "</main>",$ins+"</main>"
+  $rules=$rules -replace "</main>", ($ins + "</main>")
 }
 $rules=[Regex]::Replace($rules,"<ul id=""changeLog""></ul>","<ul id=""changeLog"">`r`n<li>"+(Get-Date -Format "yyyy-MM-dd HH:mm")+" — Governance/PWA/Diagnostics bootstrap</li>`r`n</ul>",1)
 [IO.File]::WriteAllText($rulesPath,$rules,$enc)
@@ -99,3 +99,4 @@ git add -A
 git commit -m "feat: governance + pwa + diagnostics bootstrap"
 git push origin main
 Ok "DONE ✅"
+
