@@ -296,6 +296,3 @@ function showToast(message, type = 'info') {
 
 // Run
 document.addEventListener('DOMContentLoaded', init);
-
-
-window.runDiagnostics=function(){ const out={ok:true,issues:[]}; try{ const ap=localStorage.getItem('activeProfile'); if(!ap){out.ok=false; out.issues.push('missing activeProfile');}}catch(e){out.ok=false; out.issues.push(e.message);} console.log('[ATARBOOK DIAGNOSTICS]',out); return out; };
