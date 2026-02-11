@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>פרוטוקול עבודה וכללים - ניהול חשבונות גוגל</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        border-right: 5px solid #3498db;
+      }
+      .account-box {
+        background-color: #e8f4fd;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+        font-weight: bold;
+        direction: ltr;
+        text-align: right;
+      }
+      .warning {
+        background-color: #fff3cd;
+        color: #856404;
+        padding: 1rem;
+        border-radius: 4px;
+        border: 1px solid #ffeeba;
+      }
+      code {
+        background: #eee;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📚 פרוטוקול עבודה: ניהול ריבוי חשבונות גוגל</h1>
+    <p>
+      מסמך זה מגדיר את הכללים והשיטות לעבודה עם האתר תוך שימוש בשני חשבונות גוגל נפרדים, בצורה
+      חוקית, מאובטחת ויעילה.
+    </p>
+
+    <div class="card">
+      <h2>🔑 הגדרת החשבונות הפעילים</h2>
+      <p>להלן החשבונות המוגדרים לפעילות במערכת:</p>
+
+      <h3>חשבון 1 (ראשי/אישי)</h3>
+      <div class="account-box">yanivmiz77@gmail.com</div>
+      <p>משמש ל: גלישה אישית, Drive פרטי, יומן אישי.</p>
+
+      <h3>חשבון 2 (ארגוני/בית ספר)</h3>
+      <div class="account-box">1002215800@manhischools.org.il</div>
+      <p>משמש ל: סביבת עבודה, כיתות לימוד, Classrooms, משאבים ארגוניים.</p>
+    </div>
+
+    <div class="card">
+      <h2>🛠️ אסטרטגיית עבודה טכנית (Chrome Profiles)</h2>
+      <div class="warning">
+        <strong>חשוב לזכור:</strong> לא ניתן לבצע מעבר אוטומטי מלא דרך הקוד (JS/HTML) בגלל חסימות
+        אבטחה של גוגל. הפתרון מבוסס על הפרדה ברמת הדפדפן.
+      </div>
+
+      <h3>שלב 1: יצירת פרופילים בדפדפן (חד פעמי)</h3>
+      <ol>
+        <li>לחץ על תמונת הפרופיל שלך בדפדפן Chrome (למעלה בצד).</li>
+        <li>בחר ב-<strong>Add / הוסף</strong>.</li>
+        <li>
+          צור פרופיל בשם <code>Google 1 - Yaniv</code> והתחבר לחשבון
+          <strong>yanivmiz77@gmail.com</strong>.
+        </li>
+        <li>
+          חזור על הפעולה וצור פרופיל נוסף בשם <code>Google 2 - School</code> והתחבר לחשבון
+          <strong>1002215800@manhischools.org.il</strong>.
+        </li>
+      </ol>
+
+      <h3>שלב 2: יצירת קיצורי דרך (PWA Style)</h3>
+      <p>כדי לפתוח את האתר תמיד בחשבון הנכון:</p>
+      <ul>
+        <li>
+          יש לפתוח את האתר בפרופיל של <strong>חשבון 1</strong> -> ליצור קיצור דרך לשולחן העבודה
+          ("Yaniv Site").
+        </li>
+        <li>
+          יש לפתוח את האתר בפרופיל של <strong>חשבון 2</strong> -> ליצור קיצור דרך לשולחן העבודה
+          ("School Site").
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🖱️ התנהגות הממשק (UI Rules)</h2>
+      <ul>
+        <li>
+          <strong>כפתור מעבר חשבון (צד שמאל):</strong>
+          כפתור עגול בולט בצד שמאל של ההדר. לחיצה עליו מבצעת החלפה מיידית של הפרופיל והנושא (Theme).
+        </li>
+        <li>
+          <strong>נושאי עיצוב (Themes):</strong>
+          <ul>
+            <li>
+              <span style="color: #4285f4; font-weight: bold">חשבון 1 (כחול):</span> עיצוב בלו גוגל
+              פרימיום.
+            </li>
+            <li>
+              <span style="color: #ea4335; font-weight: bold">חשבון 2 (אדום):</span> עיצוב רד סקול
+              פרימיום.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>רכיבי Hero ייחודיים (Hero Buttons):</strong>
+          <ul>
+            <li>
+              <strong>חשבון 1 בלבד:</strong> GPT Hero Button - כפתור ענק לכניסה מהירה ל-ChatGPT.
+            </li>
+            <li>
+              <strong>חשבון 2 בלבד:</strong>
+              <ul>
+                <li>
+                  <strong>Google Classroom Hero:</strong> כפתור ענק שנפתח לתפריט נגלל עם רשימת
+                  הכיתות (ז', ט'1, ח'1, ח').
+                </li>
+                <li>
+                  <strong>Moodle Hero ("מודל"):</strong> כפתור ענק שנפתח לתפריט נגלל עם רשימת
+                  המרחבים (ז, ח, ט).
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>localStorage:</strong> המערכת זוכרת את הפרופיל האחרון שנבחר גם לאחר סגירת הדפדפן.
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🚀 כניסה מהירה (Fast Access)</h2>
+      <div class="warning">
+        <p>
+          <strong>חשוב:</strong> אתר סטטי אינו יכול לעקוף סיסמאות או כניסה דו-שלבית (2FA). "התחברות
+          אוטומטית" משמעה שימוש ב-Cookies קיימים בדפדפן.
+        </p>
+      </div>
+      <ul>
+        <li><strong>כפתורים ייעודיים:</strong> WhatsApp Web, Microsoft Office וכד'.</li>
+        <li><strong>התנהגות:</strong> פתיחה בלשונית חדשה (Target _blank).</li>
+        <li>
+          <strong>חיווי למשתמש:</strong> הודעת Toast שמופיעה בעת לחיצה ומזכירה שהמהירות תלויה בחיבור
+          מוקדם בדפדפן.
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📂 תפריט גוגל מורחב (Mega Menu)</h2>
+      <p>תפריט חיבור מהיר לשירותי גוגל, זמין עבור <strong>שני החשבונות</strong>:</p>
+      <ul>
+        <li><strong>עיצוב:</strong> כפתור גוגל ראשי, נפתח לתפריט צף באנימציה.</li>
+        <li><strong>תכולה קבועה:</strong> Drive, Gmail, Calendar, KLM Notebooks.</li>
+        <li>
+          <strong>תצורה (Configuration):</strong>
+          <ul>
+            <li>הגדרות הקישורים (URLs) נמצאות בקובץ <code>assets/app.js</code>.</li>
+            <li>ניתן להגדיר קישורים שונים לכל פרופיל.</li>
+            <li>"KLM Notebooks" הוא שם המשתנה (Placeholder) לשירות המועדף.</li>
+          </ul>
+        </li>
+        <li><strong>נגישות:</strong> סגירה ב-ESC או בלחיצה מחוץ לתפריט.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <small>עודכן לאחרונה: פברואר 2026 | גרסה: 1.1</small>
+    </footer>
+  </body>
+</html>
