@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AtarBook Dashboard</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="left-controls">
+        <button id="main-account-switch-btn" class="round-switch-btn">
+          <span class="switch-icon">🔄</span> מעבר לחשבון
+        </button>
+      </div>
+      <div class="right-controls">
+        <span id="active-profile-label">...</span>
+        <div
+          class="help-tooltip"
+          title="לקבלת כניסה מהירה: שמור התחברות בדפדפן (Remember me) או השתמש בפרופילי דפדפן."
+        >
+          ℹ️ טיפ לכניסה מהירה
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>My Dashboard</h1>
+        <p>בחר שירות לכניסה מהירה</p>
+      </header>
+
+      <!-- Hero Section (GPT) - Only for Account 1 -->
+      <section id="hero-section" class="hero-section hidden">
+        <!-- Injected via JS -->
+      </section>
+
+      <!-- Fast Access Section -->
+      <section class="fast-access-section">
+        <h2>קיצורי דרך (Fast Access)</h2>
+        <div id="fast-access-grid" class="grid-container">
+          <!-- Buttons injected by JS -->
+        </div>
+      </section>
+
+      <!-- Google Mega Menu Section -->
+      <section class="google-section">
+        <div class="google-container">
+          <button id="google-mega-btn" class="google-main-btn">
+            <span class="g-icon">G</span> Google Services
+          </button>
+
+          <!-- Mega Menu Dropdown -->
+          <div id="google-mega-menu" class="mega-menu hidden">
+            <div class="menu-header">
+              <span id="menu-active-profile">פעיל: חשבון גוגל 1</span>
+              <button id="close-menu-btn" class="close-btn">&times;</button>
+            </div>
+            <div id="google-menu-grid" class="menu-grid">
+              <!-- Menu items injected by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-links">
+        <a href="rules.html" target="_blank">📖 פרוטוקול עבודה וכללים</a>
+      </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
