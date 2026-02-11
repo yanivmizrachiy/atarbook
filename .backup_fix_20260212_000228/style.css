@@ -1,0 +1,621 @@
+:root {
+    /* Base Theme Variables - Default Blue (Account 1) */
+    --primary-color: #4285f4;
+    --primary-dark: #3367d6;
+    --accent-color: #e8f0fe;
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --card-bg: #fff;
+    --btn-border: #eee;
+    
+    --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-3d: 0 6px 0 #b0bec5, 0 10px 10px rgba(0,0,0,0.2);
+    --shadow-3d-hover: 0 3px 0 #b0bec5, 0 6px 6px rgba(0,0,0,0.2);
+    --shadow-3d-active: 0 0 0 #b0bec5, 0 0 0 rgba(0,0,0,0.2);
+}
+
+/* Red Theme (Account 2) */
+body.theme-red {
+    --primary-color: #ea4335;
+    --primary-dark: #c5221f;
+    --accent-color: #fce8e6;
+    --shadow-3d: 0 6px 0 #ef9a9a, 0 10px 10px rgba(0,0,0,0.2);
+    --shadow-3d-hover: 0 3px 0 #ef9a9a, 0 6px 6px rgba(0,0,0,0.2);
+    --shadow-3d-active: 0 0 0 #ef9a9a, 0 0 0 rgba(0,0,0,0.2);
+    --btn-border: #f9dcdc;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-bottom: 3px solid var(--primary-color);
+    transition: border-color 0.4s ease;
+}
+
+.left-controls {
+    /* In RTL, this pushes to the left visually */
+    order: 2; 
+    /* Actually order doesn't change alignment in space-between, but let's be explicit if needed */
+}
+
+/* Since RTL, the first element is on the right. 
+   We want "left-controls" to be on the left.
+   In RTL:
+   Start = Right
+   End = Left
+   
+   justify-content: space-between puts the first child on the Right, last on the Left.
+   So:
+   Right Controls (Profile Label) -> Should be First Child in HTML? 
+   Wait, I put left-controls first in HTML.
+   
+   Let's fix via Flexbox order or just relying on natural flow.
+   HTML: 
+   <div top-bar>
+      <div left-controls>...</div> 
+      <div right-controls>...</div>
+   </div>
+   
+   RTL:
+   [left-controls (Right Side)]   SPACE   [right-controls (Left Side)]
+   
+   I need to FLIP this visual or just place them correctly.
+   "Left-Side Account Switch Button ... separate from any other UI"
+   
+   If I want it on the VISUAL LEFT:
+   I should ensure it is the LAST element in the flex container in RTL, or simply style it.
+*/
+
+.top-bar {
+    /* Ensure visual placement */
+    flex-direction: row; 
+    /* In RTL: Row flows Right to Left. */
+    /* Child 1 (Right visually), Child 2 (Left visually) */
+}
+
+/* WAIT. In RTL flow:
+   <div 1> <div 2>
+   [ DIV 1 ]   ----------------   [ DIV 2 ]
+   (Right)                        (Left)
+   
+   The requirement is: "LEFT: account switch button".
+   So "account switch button" should be [DIV 2].
+   "CENTER/RIGHT: title + other controls".
+   So "other controls" should be [DIV 1].
+*/
+
+/* Correcting HTML order logic via CSS order if I messed up HTML, 
+   but let's look at what I wrote in HTML:
+        <div class="left-controls">  <-- HTML Child 1
+        <div class="right-controls"> <-- HTML Child 2
+        
+   In RTL:
+   [left-controls] (Right side of screen) .... [right-controls] (Left side of screen)
+   
+   This is OPPOSITE of what I want. 
+   I want:
+   [Right Controls/Title] (Right side) .... [Switch Button] (Left side)
+   
+   So strict layout:
+*/
+
+.left-controls {
+    margin-right: auto; /* Pushes to the left end in RTL? No. */
+    margin-left: 0;
+}
+
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+}
+
+/* Specific button style for the round switch */
+.round-switch-btn {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    width: 140px;
+    height: 40px;
+    border-radius: 25px; /* Round pill shape */
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    /* 3D Effect */
+    box-shadow: 0 4px 0 #ccc, 0 5px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.round-switch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #ccc, 0 8px 15px rgba(0,0,0,0.15);
+    background-color: var(--accent-color);
+}
+
+.round-switch-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #ccc, 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Hero Section (GPT) */
+.hero-section {
+    margin: 20px 0 40px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow multiple buttons to stack or flow */
+    gap: 20px;
+}
+
+.hero-section.hidden {
+    display: none;
+}
+
+.gpt-hero-btn {
+    background: linear-gradient(135deg, white 0%, #f7f7f9 100%);
+    color: #10a37f; /* OpenAI Green roughly, or stick to theme? Requirement says "premium" "GPT logo" */
+    
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #e5e5e5;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-decoration: none;
+    
+    /* Strong 3D */
+    box-shadow: 0 10px 0 #c7c7c7, 0 15px 20px rgba(0,0,0,0.15);
+    transform: translateY(0);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.gpt-hero-btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    pointer-events: none;
+}
+
+.gpt-hero-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 0 #c7c7c7, 0 20px 30px rgba(0,0,0,0.2);
+}
+
+.gpt-hero-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 4px 0 #c7c7c7, inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.gpt-logo-svg {
+    width: 60px;
+    height: 60px;
+    fill: currentColor;
+}
+
+.gpt-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #333;
+}
+
+.g-icon {
+    font-weight: 900;
+    color: var(--primary-color);
+}
+
+/* Fast Access Buttons */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.fast-btn, .menu-item-btn {
+    background: white;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    
+    /* 3D Effect */
+    box-shadow: 0 4px 0 #ccc, 0 5px 10px rgba(0,0,0,0.1);
+    transform: translateY(0);
+}
+
+.fast-btn:hover, .menu-item-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #ccc, 0 3px 6px rgba(0,0,0,0.1);
+    background-color: #fafafa;
+}
+
+.fast-btn:active, .menu-item-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #ccc, inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-icon {
+    font-size: 2rem;
+}
+
+/* Google Section */
+.google-section {
+    margin-top: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.google-container {
+    position: relative;
+    width: 300px;
+}
+
+.google-main-btn {
+    width: 100%;
+    background: white;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.google-main-btn:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.g-icon {
+    font-weight: 900;
+    color: var(--primary-color);
+}
+
+/* Mega Menu */
+.mega-menu {
+    position: absolute;
+    bottom: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 20px;
+    z-index: 100;
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    visibility: visible;
+}
+
+.mega-menu.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    pointer-events: none;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.menu-item-btn {
+    padding: 15px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 0 #eee; 
+}
+.menu-item-btn:hover {
+    box-shadow: 0 1px 0 #eee;
+}
+
+/* Toast */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: #323232;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.footer-links {
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+.footer-links a {
+    color: #666;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* --- NEW HERO BUTTONS (Classroom / Moodle) --- */
+
+/* General Hero Button Style (Shared logic) */
+.hero-btn {
+    width: 100%;
+    max-width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 10px 0 #c7c7c7, 0 15px 20px rgba(0,0,0,0.15);
+    transform: translateY(0);
+    transition: all 0.2s;
+    position: relative;
+    /* overflow: visible for dropdowns */
+}
+
+.hero-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 0 #c7c7c7, 0 20px 30px rgba(0,0,0,0.2);
+}
+
+.hero-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 4px 0 #c7c7c7, inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hero-btn::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0));
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+/* Specific Hero Buttons */
+.classroom-hero-btn {
+    background: linear-gradient(135deg, #e6f4ea 0%, #ceead6 100%);
+    color: #137333;
+}
+
+.moodle-hero-btn {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #e65100;
+}
+
+.hero-icon-svg {
+    width: 60px;
+    height: 60px;
+    fill: currentColor;
+}
+
+.hero-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #333;
+}
+
+/* Hero Button Wrapper for Dropdowns */
+.hero-wrapper {
+    position: relative;
+    /* width/max-width handled by child */
+}
+
+/* Hero Dropdown Menu */
+.hero-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 15px;
+    z-index: 200;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid #ddd;
+}
+
+.hero-dropdown.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    pointer-events: none;
+}
+
+.hero-dropdown-item {
+    display: block;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    border: 1px solid #eee;
+    transition: background 0.2s;
+    text-align: right;
+}
+
+.hero-dropdown-item:hover {
+    background: #eee;
+}
+
+.hero-dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+/* VS Code Light Frame Simulation */
+:root {
+    --vscode-shell-bg: #f3f3f3; /* window background */
+    --vscode-titlebar: #ffffff; /* title bar */
+    --vscode-activity-bg: #ededed; /* activity bar */
+    --vscode-editor-bg: #ffffff; /* editor pane */
+    --vscode-border: #e6e6e6;
+}
+
+.vscode-shell {
+    min-height: 100vh;
+    display: flex;
+    background: var(--vscode-shell-bg);
+}
+
+.activity-bar {
+    width: 48px;
+    background: var(--vscode-activity-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 6px;
+    gap: 14px;
+    box-shadow: inset -1px 0 0 var(--vscode-border);
+}
+.activity-icon{
+    width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;cursor:default;font-size:16px;color:#666
+}
+
+.vscode-window {
+    flex:1; /* take remaining space */
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding: 14px; /* outer padding around the frame */
+}
+
+.titlebar{
+    height: 36px;
+    background: var(--vscode-titlebar);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0 10px;
+    border: 1px solid var(--vscode-border);
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #444;
+}
+.titlebar-left{display:flex;align-items:center;gap:8px}
+.traffic{width:11px;height:11px;border-radius:50%;display:inline-block}
+.traffic.red{background:#ff5f56}
+.traffic.yellow{background:#ffbd2e}
+.traffic.green{background:#27c93f}
+.title{font-weight:600;opacity:0.9}
+
+.editor-pane{
+    background: var(--vscode-editor-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    padding: 18px;
+    min-height: calc(100vh - 140px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    overflow:auto;
+}
+
+/* Ensure the inner top-bar and container look good inside editor pane */
+.editor-pane .top-bar{background:transparent;border-bottom:none;box-shadow:none;padding:6px 0;margin:0 0 12px 0}
+.editor-pane .container{background:transparent;max-width:100%;padding:0}
